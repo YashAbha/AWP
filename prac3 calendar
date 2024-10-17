@@ -1,0 +1,344 @@
+Practical 3a
+Aim: Create a simple web page with various server controls to demonstrate setting and use of their properties. (Example : AutoPostBack)
+Design: 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 3 a.aspx.cs" Inherits="Practical_3.Pract_3_a" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 50%;
+            border:3px solid navy;
+            background-color:#a7a122
+        }
+        .auto-style4 {
+            text-align: center;
+            height: 46px;
+        }
+        .auto-style12 {
+            height: 47px;
+        }
+        .auto-style13 {
+            width: 215px;
+            height: 56px;
+        }
+        .auto-style14 {
+            height: 56px;
+            width: 289px;
+        }
+        .auto-style15 {
+            width: 215px;
+            height: 54px;
+        }
+        .auto-style16 {
+            height: 54px;
+            width: 289px;
+        }
+        .auto-style17 {
+            width: 215px;
+            height: 52px;
+        }
+        .auto-style18 {
+            height: 52px;
+            width: 289px;
+        }
+        .auto-style19 {
+            width: 215px;
+            height: 49px;
+        }
+        .auto-style20 {
+            height: 49px;
+            width: 289px;
+        }
+        body{
+            background-color:#e4cfcf
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table class="auto-style1">
+                <tr>
+                    <td class="auto-style13">
+                        <asp:Label ID="Label1" runat="server" Text="RNo"></asp:Label>
+                    </td>
+                    <td class="auto-style14">
+                        <asp:TextBox ID="TextBox1" runat="server" TabIndex="1"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style15">
+                        <asp:Label ID="Label2" runat="server" Text="Name"></asp:Label>
+                    </td>
+                    <td class="auto-style16">
+                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style17">
+                        <asp:Label ID="Label3" runat="server" Text="Class"></asp:Label>
+                    </td>
+                    <td class="auto-style18">
+                        <asp:RadioButton ID="RadioButton1" runat="server" Text="FY" GroupName="Class" />
+&nbsp;<asp:RadioButton ID="RadioButton2" runat="server" Text="SY" GroupName="Class" />
+&nbsp;<asp:RadioButton ID="RadioButton3" runat="server" Text="TY" GroupName="Class" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style19">
+                        Course</td>
+                    <td class="auto-style20">
+                        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" TabIndex="2">
+                            <asp:ListItem>B.Com</asp:ListItem>
+                            <asp:ListItem>BMS</asp:ListItem>
+                            <asp:ListItem>B.Sc.(I.T.)</asp:ListItem>
+                            <asp:ListItem>B.Sc.(CS)</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style4" colspan="2">
+                        <asp:Button ID="Button1" runat="server" Text="Submit" OnClick="Button1_Click" AccessKey="S" TabIndex="3" ToolTip="Please Submit Youe Data" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style12" colspan="2">
+                        <asp:Label ID="Label5" runat="server" Text=" "></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+
+Code: 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Practical_3
+{
+    public partial class Pract_3_a : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+           
+                string s = "You have been enrolled in ";
+                if (RadioButton1.Checked == true)
+                {
+                    s += RadioButton1.Text;
+                }
+                else if (RadioButton2.Checked == true)
+                {
+                    s += RadioButton2.Text;
+                }
+                else if (RadioButton3.Checked == true)
+                {
+                    s += RadioButton3.Text;
+                }
+                s += DropDownList1.SelectedItem;
+                Label5.Text = s;
+            }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Response.Write("You have selected " + DropDownList1.SelectedItem + " Course");
+        }
+    }
+}
+Output:
+ 
+
+ 
+Practical 3b
+Aim: Create a simple application to demonstrate your vacation using calendar control.
+Design: 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 3bb.aspx.cs" Inherits="Practical_3.Pract_3bb" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Calendar ID="Calendar1" runat="server" NextMonthText="Next" OnDayRender="Calendar1_DayRender" PrevMonthText="Pre" SelectionMode="DayWeekMonth" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" OnSelectionChanged="Calendar1_SelectionChanged" Width="350px">
+                <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                <OtherMonthDayStyle ForeColor="#999999" />
+                <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                <TodayDayStyle BackColor="#CCCCCC" />
+            </asp:Calendar>
+            
+            <h4>NAME: SANDESH </h4>
+        </div>
+    </form>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Practical_3
+{
+    public partial class Pract_3bb : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if ((e.Day.Date >= new DateTime(2024, 09, 7)) && (e.Day.Date <= new DateTime(2024, 09, 12)))
+            {
+                e.Cell.BackColor = System.Drawing.Color.Navy;
+                e.Cell.BorderColor = System.Drawing.Color.Black;
+                e.Cell.ForeColor= System.Drawing.Color.White;
+                e.Cell.BorderWidth = new Unit(3);
+                if (e.Day.Date == new DateTime(2024, 09, 7))
+                {
+                    e.Cell.Controls.Add(new LiteralControl("/br Ganpati Vacation Start"));
+                }
+                if (e.Day.Date == new DateTime(2024, 09, 12))
+                {
+                    e.Cell.Controls.Add(new LiteralControl("/br Ganpati Vacation End"));
+                }
+            }
+        }
+
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (Calendar1.SelectedDate.Date >= new DateTime(2024, 09, 7) && Calendar1.SelectedDate.Date <= new DateTime(2024, 09, 12))
+                Response.Write("</br><h1>Ganpati Vacation..... Go to your village and worship Lord Ganesh</h1></br>");
+        }
+    }
+}
+Output:
+ 
+Practical 3c
+Aim: Demonstrate the use of Treeview operations on the web form
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract3c.aspx.cs" Inherits="Practical_3.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            Treeview Contorl Navigation: 
+            <asp:TreeView ID="TreeView1" runat="server" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged" ShowCheckBoxes="All" OnTreeNodeCollapsed="TreeView1_TreeNodeCollapsed" ShowLines="True">
+                <HoverNodeStyle BackColor="#FF99FF" ForeColor="#003300" />
+                <LeafNodeStyle BackColor="#99CCFF" ForeColor="#663300" />
+                <Nodes>
+                    <asp:TreeNode Text="AWP Practical" Value="AWP Practical">
+                        <asp:TreeNode Text="Practical 3" Value="Practical 3">
+                            <asp:TreeNode Text="Practical 3a" Value="Practical 3a" NavigateUrl="~/Pract 3 a.aspx" Target="new"/>
+                            <asp:TreeNode Text="Practical 3b" Value="Practical 3b" NavigateUrl="~/Pract 3 b.aspx">
+                                <asp:TreeNode Text="Practical 3b b" Value="Practical 3b b" NavigateUrl="~/Pract 3bb.aspx"></asp:TreeNode>
+                                <asp:TreeNode Text="Practical 3bc" Value="Practical 3bc" NavigateUrl="~/Pract3bd.aspx"></asp:TreeNode>
+                            </asp:TreeNode>
+                            <asp:TreeNode Text="Practical 3c" Value="Practical 3c"></asp:TreeNode>
+                        </asp:TreeNode>
+                        <asp:TreeNode Text="Website" Value="Website">
+                            <asp:TreeNode Text="Mumbai University" Value="Mumbai University" NavigateUrl="https://mu.ac.in/">
+                                <asp:TreeNode Text="GD Jalan" Value="GD Jalan" NavigateUrl="https://gdjalan.edu.in/"></asp:TreeNode>
+                            </asp:TreeNode>
+                        </asp:TreeNode>
+                    </asp:TreeNode>
+                </Nodes>
+                <ParentNodeStyle BackColor="#66FF99" ForeColor="#000099" />
+                <RootNodeStyle BackColor="#FFFF99" ForeColor="#990000" />
+                <SelectedNodeStyle BackColor="Black" ForeColor="White" />
+            </asp:TreeView>
+
+            <br />
+            <br />
+            <asp:Label ID="Label1" runat="server" BackColor="#FFFF99" Font-Bold="True" Font-Size="20pt"></asp:Label>
+
+            <br />
+            <br />
+            <br />
+            <h4>NAME: Sandesh </h4>
+  
+    </div>
+    </form>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Practical_3
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+         /*if (!IsPostBack)
+            {
+                BindData();
+            }
+        }
+        protected void BindData()
+        {
+            DataSet ds = new DataSet();
+            ds.ReadXml(Server.MapPath("XMLFile1.xml"));
+            if (ds!= null && ds.HasChanges())
+            {
+                DataList1.DataSource = ds;
+                DataList1.DataBind();
+            }
+            else
+            {
+                DataList1.DataBind();
+            }*/
+        }
+
+
+        protected void TreeView1_SelectedNodeChanged(object sender, EventArgs e)
+        {
+            Label1.Text = "You have selected the option:" + TreeView1.SelectedValue;
+        }
+
+        protected void TreeView1_TreeNodeCollapsed(object sender, TreeNodeEventArgs e)
+        {
+            Label1.Text = "The Value Collapsed was:" + e.Node.Value;
+        }
+    }
+}
+Output:
+ 
+
+ 
