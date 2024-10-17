@@ -1,0 +1,553 @@
+Practical 5a
+Aim: Create Web Form to demonstrate use of Website Navigation controls.
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="prac_5(A).aspx.cs" Inherits="Pract_4_a.prac_5_A_" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style type="text/css">
+        .menu {
+            width: 50%;
+            height:100px;
+            border:3px solid navy;
+            background-color:black;
+        }
+        </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="menu">
+            
+            <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" DisappearAfter="1000" Font-Bold="True" Font-Size="X-Large" ForeColor="White">
+                <DynamicHoverStyle BackColor="Black" ForeColor="White" />
+            </asp:Menu>
+            </div>
+            <div><h1>Welcome to our website</h1>
+            <h3>This is the Home Page</h3> <br/></div>
+            
+            
+
+            <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+            <br />
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                <CurrentNodeStyle BackColor="#CCFFCC" />
+            </asp:SiteMapPath>
+            <br />
+        
+    </form>
+</body>
+</html>
+
+Page 1:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page1.aspx.cs" Inherits="Pract_4_a.Page1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1>Welcome to Page 1 of our website</h1>
+        </div>
+        <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+        </asp:SiteMapPath>
+    </form>
+</body>
+</html>
+ 
+
+Page 2:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page2.aspx.cs" Inherits="Pract_4_a.Page2" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1>Welcome to Page 2 of our website</h1>
+        </div>
+        <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+        </asp:SiteMapPath>
+    </form>
+</body>
+</html>
+ 
+
+Page 3:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page3.aspx.cs" Inherits="Pract_4_a.Page3" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1>Welcome to Page 3 of our website</h1>
+        </div>
+        <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+        </asp:SiteMapPath>
+    </form>
+</body>
+</html>
+ 
+
+Page 4:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page4.aspx.cs" Inherits="Pract_4_a.Page4" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1>Welcome to Page 4 of our website</h1>
+        </div>
+        <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+        </asp:SiteMapPath>
+    </form>
+</body>
+</html>
+ 
+
+Output:
+
+ 
+
+ 
+
+
+
+
+ 
+Practical 5b
+Aim: Create a web application to demonstrate use of Master Page and content page
+Design: 
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Pract5b.aspx.cs" Inherits="Pract5.Pract5b" Theme ="Theme1"%>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            height: 29px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <h2 align="center"> Contact Us</h2>
+<h3 align="center"> Fill the datails</h3>
+    <table class="auto-style1" align="center">
+        <tr>
+            <td class="auto-style1">
+                <asp:Label ID="Label1" runat="server" Text="Name:"></asp:Label>
+            </td>
+            <td class="auto-style1">
+                <asp:TextBox ID="TextBox1" runat="server" SkinID="Yellow"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label2" runat="server" Text="Email ID:"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="TextBox2" runat="server" SkinID="Yellow"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style1">
+                <asp:Label ID="Label3" runat="server" Text="Mobile No."></asp:Label>
+            </td>
+            <td class="auto-style1">
+                <asp:TextBox ID="TextBox3" runat="server" SkinID="Blue"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label4" runat="server" Text="Your Query"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="TextBox4" runat="server" SkinID="Blue"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <asp:Button ID="Button1" runat="server" Text="Submit" SkinID="Green" />
+               
+                
+            </td>
+        </tr>
+    </table>
+&nbsp;<br />
+</asp:Content>
+
+MasterPage:
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Pract5.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <style type="text/css">
+        body{
+background-color:powderblue;
+
+        }
+        .head {
+            background-color:#cc3399;
+            color:white;
+        }
+        footer{
+background-color:black;
+            color:white;
+        }
+</style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class ="head">
+            <h2 align="center">Ghanshyamdas Jalan College of Science & Commerce</h2>
+            <h4 align="center"> Chinchowli Rd, Malad, Upper Govind Nagar, Malad East, Mumbai, Maharashtra 400097</h4>
+            <p align="center"> &nbsp;</p>
+            </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <footer align="center">Copyright by GD JALAN</footer>
+    </form>
+     <h4>NAME: SANDESH</h4>
+    
+</body>
+</html>
+ 
+
+Output:
+ 
+
+ 
+Practical 5c
+Aim: Create a web application to demonstrate various states of ASP.NET Pages.
+1.	ViewState:
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 5 C ViewState.aspx.cs" Inherits="Pract5.Pract_5_C_ViewState" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            View Variable:
+            <asp:Label ID="Label1" runat="server" Text="View Data is:"></asp:Label>
+            <br />
+            <br />
+            Session Variable: 
+            <asp:Label ID="Label2" runat="server" Text="Session Variable"></asp:Label>
+            <br />
+            <br />
+            Application Variable:
+            <asp:Label ID="Label3" runat="server" Text="Application Variable"></asp:Label>
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Get Data" />
+        </div>
+    </form>
+    <h4>NAME: SANDESH</h4>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Pract5
+{
+    public partial class Pract_5_C_ViewState : System.Web.UI.Page
+    {
+        int count = 0;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+          if (!IsPostBack)
+            {
+                if (ViewState["cnt"] == null)
+                {
+                    //ViewState["cnt"] = count;
+                    ViewState.Add("cnt", count);
+                }
+                if (Session["scnt"] == null)
+                {
+                    //Session["scnt"] = count;
+                    Session.Add("scnt", count);
+                }
+                if (Application["acnt"] == null)
+                {
+                    //Application["acnt"] = count;
+                    Application.Add("acnt", count);
+                }
+
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            /* count = int.Parse(ViewState["cnt"].ToString());
+             count++;
+             ViewState["cnt"] = count;
+             Label1.Text = ViewState["cnt"].ToString();*/
+            ViewState["cnt"] = (int)ViewState["cnt"] + 1;
+            Label1.Text = ViewState["cnt"].ToString();
+            Session["scnt"] = (int)Session["scnt"] + 1;
+            Label2.Text = Session["scnt"].ToString();
+            Application["acnt"] = (int)Application["acnt"] + 1;
+            Label3.Text = Application["acnt"].ToString();
+            /*count++;
+            Label1.Text = count.ToString();*/
+
+        }
+    }
+}
+Output:
+ 
+
+2.	QueryString
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 5c Querystr1.aspx.cs" Inherits="Pract5.Pract_5c_Querystr1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 68%;
+            height: 158px;
+        }
+        .auto-style2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table class="auto-style1">
+                <tr>
+                    <td colspan="2"> <h2 align ="center"> Query String Example </h2> &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label1" runat="server" Text="UserID"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label2" runat="server" Text="UserName"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2" colspan="2">
+                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Send Data" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <h4>NAME: SANDESH</h4>
+</body>	
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Pract5
+{
+    public partial class Pract_5c_Querystr1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            /*Session["userId"] = TextBox1.Text;
+            Session["userName"] = TextBox2.Text;*/
+            /*Application["userId"] = TextBox1.Text;
+            Application["userName"] = TextBox2.Text;*/
+            //Response.Redirect("~/Pract 5c Querystr2aspx.aspx");
+            Response.Redirect("~/Pract 5c Querystr2aspx.aspx?userId=" +TextBox1.Text + "&userName=" + TextBox2.Text );
+        }
+    }
+}
+
+Output:
+ 
+
+ 
+
+
+
+3.	Session and Application State
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 5c Session and Application State.aspx.cs" Inherits="Pract5.Pract_5c_Session_and_Application_State"%>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Get Data" />
+        </div>
+    </form>
+    <h4>NAME: SANDESH</h4>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Pract5
+{
+    public partial class Pract_5c_Session_and_Application_State : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Label1.Text = "";
+            Application["OnlineApplicationUsers"] = (int)Application["OnlineApplicationUsers"] + 1;
+            Label1.Text = "Aplication Count " + Application["OnlineApplicationUsers"];
+
+            Session["OnlineSessionUsers"] = (int)Session["OnlineSessionUsers"] + 1;
+            Label1.Text = Label1.Text + "<br> Session Count " + Session["OnlineSessionUsers"];
+        }
+    }
+}
+
+
+
+Output:
+ 
+
+4.	Cookies
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Practica5cCookies1.aspx.cs" Inherits="Pract5.Practica5cCookies1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="UserName:"></asp:Label>
+&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+            User Email:&nbsp;&nbsp;
+            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
+        </div>
+    </form>
+    <h4>NAME: SANDESH</h4>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Pract5
+{
+    public partial class Practica5cCookies1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            HttpCookie cookie = new HttpCookie("UserInfo");
+            cookie["Name"] = TextBox1.Text;
+            cookie["Email"] = TextBox2.Text;
+            cookie.Expires = DateTime.Now.AddDays(3);
+            //cookie.Expires = DateTime.Now.AddSeconds(100);
+            Response.Cookies.Add(cookie);
+            Response.Redirect("~/Practica5cCookies2.aspx");
+        }
+    }
+}
+
+Output:
+ 
+
+ 
+
+ 
