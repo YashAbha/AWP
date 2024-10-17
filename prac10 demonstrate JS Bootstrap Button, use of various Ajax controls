@@ -1,0 +1,121 @@
+Practical 10a
+Aim: Create a web application to demonstrate JS Bootstrap Button.
+
+Design & Code:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Bootstrap.aspx.cs" Inherits="Pract10a.Bootstrap" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+   <title>Bootstrap example</title> 
+<meta charset="utf-8"/> 
+<meta name="viewport" content="width=device-width, initial-scale=1"/> 
+<%--<link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/> 
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"> 
+</script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> 
+</script> --%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<strong>Bootsrap Button Styles in web Page<br /> 
+<br /> 
+</strong> 
+</div> 
+<asp:Button ID="Button1" runat="server" CssClass="btn-primary" Text=".btn-primary" /> 
+<asp:Button ID="Button2" runat="server" CssClass="btn-warning" Text=".btn-warning" /> 
+<br /> 
+<br /> 
+<asp:Button ID="Button4" runat="server" CssClass="btn-danger" Text=".btn-danger" Width="112px" /> 
+<br /> 
+<br /> 
+<asp:Button ID="Button5" runat="server" CssClass="btn-primary disabled" Text=",btn-disabled" /> 
+<asp:Button ID="Button6" runat="server" CssClass="btn-primary active" Text=".active" /> 
+<br /> 
+<br /> 
+<asp:Button ID="Button7" runat="server" CssClass="btn-primary btn-lg" Text=".btn-lg" /> 
+<asp:Button ID="Button8" runat="server" Text=".btn.xs" CssClass="btn-primary btn-xs" /> 
+<br /> 
+<br /> 
+<asp:Button ID="Button9" runat="server" Text=".btn-block" CssClass="btn-primary btn-block" /> 
+</form>
+    <h4>NAME: SAKET</h4>
+    </body> 
+</html> 
+Practical 10b
+Aim: Create a web application to demonstrate use of various Ajax controls
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pract 10 B.aspx.cs" Inherits="Practical_10.pract_10_c" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    </head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+            <br />
+            <h1 style="color:blueviolet">From Outside of Update Pannel:</h1>
+            <h3>It will refresh the whole page when the button gets pressed.</h3>
+            Enter The Name :
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Get Name" />
+            <br />
+            <br />
+            <br />
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <h1 style="color:blueviolet">From Inside of Update Pannel:</h1> <br/>
+                    <h3>It will refresh the only sub part of page when the button gets pressed.</h3>
+                    Enter The Surname:
+                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+<br />
+                    <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+                    <br />
+                    <br />
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="1000" AssociatedUpdatePanelID="UpdatePanel1">
+                        <ProgressTemplate>
+                            Please Wait ...
+                            <br />
+                            <asp:Image ID="Image1" runat="server" ImageUrl=”~image” />
+                            
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>                       
+                    <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Get Surname" />
+                    <br>
+                    </br>
+                    <br />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
+                    Time :
+                    <asp:Label ID="Label3" runat="server"></asp:Label>
+                    &nbsp;<asp:Timer ID="Timer1" runat="server" Interval="10000" OnTick="Timer1_Tick1">
+                    </asp:Timer>
+                    <br />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <br />
+        </div>
+    </form>
+    <h4>NAME: SAKET</h4>
+</body>
+</html>
