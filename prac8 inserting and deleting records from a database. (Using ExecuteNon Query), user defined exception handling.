@@ -1,0 +1,235 @@
+Practical 8a
+
+Aim: Create a web application for inserting and deleting records from a database. (Using ExecuteNon Query).
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 8a.aspx.cs" Inherits="Practical_8.Pract_8a" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 36%;
+            height: 111px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table class="auto-style1">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label2" runat="server" Text="Employee ID"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label3" runat="server" Text="Employee Name"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label4" runat="server" Text="Employee Salary"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="Button1" runat="server" Text="Insert" OnClick="Button1_Click" />
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="Label5" runat="server"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:connStr2 %>" 
+                InsertCommand="INSERT INTO [Employee2] ([Eid], [Ename], [Esalary]) VALUES (@Eid, @Ename, @Esalary)">
+                <InsertParameters>
+                    <asp:Parameter Name="Eid" Type="Int32" />
+                    <asp:Parameter Name="Ename" Type="String" />
+                    <asp:Parameter Name="Esalary" Type="Decimal" />
+                </InsertParameters>
+            </asp:SqlDataSource>
+            <br />
+            <asp:Label ID="Label6" runat="server" Text="Select Employee Id:"></asp:Label>
+            &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" DataTextField="Eid" DataValueField="Eid">
+            </asp:DropDownList>
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:connStr2 %>" 
+                SelectCommand="SELECT Eid FROM Employee2">
+            </asp:SqlDataSource>
+            <br />
+            <br />
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Delete" />
+            <br />
+            <br />
+        </div>
+    </form>
+    <h4>NAME: SANDESH</h4>
+</body>
+</html>
+
+
+Code:
+using System;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Practical_8
+{
+    public partial class Pract_8a : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // Optional: Bind the DropDownList on first load
+            if (!IsPostBack)
+            {
+                DropDownList1.DataBind();
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            // Validate TextBox inputs
+            if (string.IsNullOrEmpty(TextBox1.Text) || string.IsNullOrEmpty(TextBox2.Text) || string.IsNullOrEmpty(TextBox3.Text))
+            {
+                Label5.Text = "Please fill all fields.";
+                return;
+            }
+
+            // Set Insert Parameters
+            SqlDataSource1.InsertParameters["Eid"].DefaultValue = TextBox1.Text;
+            SqlDataSource1.InsertParameters["Ename"].DefaultValue = TextBox2.Text;
+            SqlDataSource1.InsertParameters["Esalary"].DefaultValue = TextBox3.Text;
+
+            // Execute Insert
+            try
+            {
+                SqlDataSource1.Insert();
+                Label5.Text = "Record added successfully";
+     
+                
+                DropDownList1.DataBind(); // Refresh the DropDownList
+            }
+            catch (Exception ex)
+            {
+                Label5.Text = "Error: " + ex.Message;
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            // Validate DropDownList selection
+            if (DropDownList1.SelectedValue == "")
+            {
+                Label5.Text = "Please select an employee to delete.";
+                return;
+            }
+
+            // Set Delete Command and execute
+            try
+            {
+                SqlDataSource1.DeleteCommand = "DELETE FROM Employee2 WHERE Eid = @Eid";
+                SqlDataSource1.DeleteParameters.Clear();
+                SqlDataSource1.DeleteParameters.Add("Eid", DropDownList1.SelectedItem.Value);
+                SqlDataSource1.Delete();
+
+                Label5.Text = "Record deleted successfully";
+                DropDownList1.DataBind(); // Refresh the DropDownList
+            }
+            catch (Exception ex)
+            {
+                Label5.Text = "Error: " + ex.Message;
+            }
+        }
+    }
+}
+Practical 8b
+
+Aim: Create a web application for user defined exception handling.
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="New_Pract_8_b.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+       <div> 
+<asp:Label ID="Label1" runat="server" Text=""></asp:Label> 
+<br /> 
+<br /> 
+<asp:Label ID="Label2" runat="server" Text=""></asp:Label> 
+</div>
+    </form>
+   
+</body>
+</html>
+
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace New_Pract_8_b
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // Throwing the custom exception
+                throw new UserDefinedException("New User Defined Exception");
+            }
+            catch (UserDefinedException ex) // Catching the custom exception
+            {
+                Label1.Text = "<b>Exception caught here: </b>" + ex.Message;
+            }
+            catch (Exception ex) // Catching any other exceptions
+            {
+                Label1.Text = "<b>Exception caught here: </b>" + ex.ToString();
+            }
+
+            // Final statement
+            Label2.Text = "Final Statement that is executed";
+        }
+
+        // Custom exception class
+        class UserDefinedException : Exception
+        {
+            public UserDefinedException(string message) : base(message)
+            {
+                // Optionally log the exception message or perform other actions
+            }
+        }
+    }
+}    
