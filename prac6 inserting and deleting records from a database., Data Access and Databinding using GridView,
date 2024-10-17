@@ -1,0 +1,304 @@
+Practical 6a
+Aim: Create a web application for inserting and deleting records from a database.
+
+Design & Code:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="New_Pract_6a.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h2>Inserting and deleting records from a database</h2>
+            <asp:DetailsView ID="DetailsView1" runat="server" Height="54px" Width="157px" AllowPaging="True" AutoGenerateRows="False" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" DataKeyNames="Cust_Id" DataSourceID="SqlDataSource1">
+                <EditRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
+                <Fields>
+                    <asp:BoundField DataField="Cust_Id" HeaderText="Cust_Id" ReadOnly="True" SortExpression="Cust_Id" />
+                    <asp:BoundField DataField="Cust_Name" HeaderText="Cust_Name" SortExpression="Cust_Name" />
+                    <asp:BoundField DataField="State" HeaderText="State" SortExpression="State" />
+                    <asp:BoundField DataField="City" HeaderText="City" SortExpression="City" />
+                    <asp:CommandField ShowDeleteButton="True" ShowInsertButton="True" />
+                </Fields>
+                <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
+                <FooterTemplate>
+                    Copyright by Ravi Sir
+                </FooterTemplate>
+                <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
+                <HeaderTemplate>
+                    Customer Details:
+                </HeaderTemplate>
+                <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
+                <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
+            </asp:DetailsView>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:TYConnectionString %>" DeleteCommand="DELETE FROM [Customer] WHERE [Cust_Id] = @original_Cust_Id AND (([Cust_Name] = @original_Cust_Name) OR ([Cust_Name] IS NULL AND @original_Cust_Name IS NULL)) AND (([State] = @original_State) OR ([State] IS NULL AND @original_State IS NULL)) AND (([City] = @original_City) OR ([City] IS NULL AND @original_City IS NULL))" InsertCommand="INSERT INTO [Customer] ([Cust_Id], [Cust_Name], [State], [City]) VALUES (@Cust_Id, @Cust_Name, @State, @City)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Customer]" UpdateCommand="UPDATE [Customer] SET [Cust_Name] = @Cust_Name, [State] = @State, [City] = @City WHERE [Cust_Id] = @original_Cust_Id AND (([Cust_Name] = @original_Cust_Name) OR ([Cust_Name] IS NULL AND @original_Cust_Name IS NULL)) AND (([State] = @original_State) OR ([State] IS NULL AND @original_State IS NULL)) AND (([City] = @original_City) OR ([City] IS NULL AND @original_City IS NULL))">
+                <DeleteParameters>
+                    <asp:Parameter Name="original_Cust_Id" Type="Int32" />
+                    <asp:Parameter Name="original_Cust_Name" Type="String" />
+                    <asp:Parameter Name="original_State" Type="String" />
+                    <asp:Parameter Name="original_City" Type="String" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="Cust_Id" Type="Int32" />
+                    <asp:Parameter Name="Cust_Name" Type="String" />
+                    <asp:Parameter Name="State" Type="String" />
+                    <asp:Parameter Name="City" Type="String" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="Cust_Name" Type="String" />
+                    <asp:Parameter Name="State" Type="String" />
+                    <asp:Parameter Name="City" Type="String" />
+                    <asp:Parameter Name="original_Cust_Id" Type="Int32" />
+                    <asp:Parameter Name="original_Cust_Name" Type="String" />
+                    <asp:Parameter Name="original_State" Type="String" />
+                    <asp:Parameter Name="original_City" Type="String" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
+            <br />
+            <br />
+            <asp:FormView ID="FormView1" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" DataKeyNames="Cust_Id" DataSourceID="SqlDataSource1" GridLines="Both">
+                <EditItemTemplate>
+                    Cust_Id:
+                    <asp:Label ID="Cust_IdLabel1" runat="server" Text='<%# Bind("Cust_Id") %>' />
+                    <br />
+                    Cust_Name:
+                    <asp:TextBox ID="Cust_NameTextBox" runat="server" Text='<%# Bind("Cust_Name") %>' />
+                    <br />
+                    State:
+                    <asp:TextBox ID="StateTextBox" runat="server" Text='<%# Bind("State") %>' />
+                    <br />
+                    City:
+                    <asp:TextBox ID="CityTextBox" runat="server" Text='<%# Bind("City") %>' />
+                    <br />
+                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </EditItemTemplate>
+                <EditRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
+                <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
+                <FooterTemplate>
+                    Copyright by Ravi Sir
+                </FooterTemplate>
+                <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
+                <HeaderTemplate>
+                    Customer Details:
+                </HeaderTemplate>
+                <InsertItemTemplate>
+                    Cust_Id:
+                    <asp:TextBox ID="Cust_IdTextBox" runat="server" Text='<%# Bind("Cust_Id") %>' />
+                    <br />
+                    Cust_Name:
+                    <asp:TextBox ID="Cust_NameTextBox" runat="server" Text='<%# Bind("Cust_Name") %>' />
+                    <br />
+                    State:
+                    <asp:TextBox ID="StateTextBox" runat="server" Text='<%# Bind("State") %>' />
+                    <br />
+                    City:
+                    <asp:TextBox ID="CityTextBox" runat="server" Text='<%# Bind("City") %>' />
+                    <br />
+                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </InsertItemTemplate>
+                <ItemTemplate>
+                    Cust_Id:
+                    <asp:Label ID="Cust_IdLabel" runat="server" Text='<%# Bind("Cust_Id") %>' />
+                    <br />
+                    Cust_Name:
+                    <asp:Label ID="Cust_NameLabel" runat="server" Text='<%# Bind("Cust_Name") %>' />
+                    <br />
+                    State:
+                    <asp:Label ID="StateLabel" runat="server" Text='<%# Bind("State") %>' />
+                    <br />
+                    City:
+                    <asp:Label ID="CityLabel" runat="server" Text='<%# Bind("City") %>' />
+                    <br />
+                    <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" />
+                    &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete" />
+                    &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="New" />
+                </ItemTemplate>
+                <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
+                <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
+            </asp:FormView>
+            <br />
+            <h4>NAME: SANDESH</h4>
+        </div>
+    </form>
+</body>
+</html>
+
+Web.config:
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  https://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <connectionStrings>
+    <add name="TYConnectionString" connectionString="Server=SAKET;Database=TYDatabase;Integrated Security=True;" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.7.2" />
+    <httpRuntime targetFramework="4.7.2" />
+  </system.web>
+  <system.codedom>
+    <compilers>
+      <compiler language="c#;cs;csharp" extension=".cs" warningLevel="4" compilerOptions="/langversion:default /nowarn:1659;1699;1701;612;618" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+      <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" warningLevel="4" compilerOptions="/langversion:default /nowarn:41008,40000,40008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    </compilers>
+  </system.codedom>
+</configuration>
+
+
+Output:
+ 
+ 
+
+ 
+Practical 6b
+Aim: Create a web application to display Using Disconnected Data Access and Databinding using GridView
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 6b.aspx.cs" Inherits="Practical_8.Pract_8c" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="Employee Salary &gt;"></asp:Label>
+&nbsp;<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            &nbsp;
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <br />
+            <br />
+            <asp:Label ID="Label2" runat="server"></asp:Label>
+            <br />
+            <br />
+            <asp:GridView ID="GridView1" runat="server" BorderStyle="Ridge" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            </asp:GridView>
+        </div>
+    </form>
+    <h4>NAME: SANDESH</h4>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+using System.Configuration;
+
+namespace Practical_8
+{
+    public partial class Pract_8c : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Debugging - Check if TextBox1 is null
+                if (TextBox1 == null)
+                {
+                    throw new Exception("TextBox1 is null.");
+                }
+
+                string connStr = WebConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+                if (string.IsNullOrEmpty(connStr))
+                {
+                    Label2.Text = "Connection string not found!";
+                    return;
+                }
+                using (SqlConnection con = new SqlConnection(connStr))
+                {
+                    con.Open();
+                    string sql = "SELECT * FROM Employee WHERE Esalary > @Salary";
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        decimal salary;
+                        if (decimal.TryParse(TextBox1.Text, out salary))
+                        {
+                            cmd.Parameters.AddWithValue("@Salary", salary);
+
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+
+                            // Debugging - Check if dataset is empty
+                            if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+                            {
+                                Label2.Text = "No records found.";
+                            }
+                            else
+                            {
+                                GridView1.DataSource = ds.Tables[0];
+                                GridView1.DataBind();
+                            }
+                        }
+                        else
+                        {
+                            Label2.Text = "Please enter a valid salary.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Label2.Text = "";
+                Label2.Text = "Invalid Query ..." + ex.Message;
+            }
+        }
+
+    }
+}
+
+Web.config:
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  https://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <system.web>
+    <compilation debug="true" targetFramework="4.7.2" />
+    <httpRuntime targetFramework="4.7.2" />
+  </system.web>
+
+	<connectionStrings>
+		<add name="connStr" connectionString="Data Source=SAKET;Initial Catalog=EmployeeDB;Integrated Security=True" providerName="System.Data.SqlClient" />
+	</connectionStrings>
+
+</configuration>
+
+Output:
+
+ 
+
+ 
