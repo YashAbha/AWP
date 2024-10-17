@@ -1,0 +1,190 @@
+Practical 2a
+Aim: Create a simple application to demonstrate the concepts boxing and unboxing.
+Code: 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NewPract2_a_
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("NAME: Sandesh \n\n");
+            // Boxing: Converting a value type (int) to an object
+            int num = 123; // Value type
+            object obj = num; // Boxing - num is converted to an object
+            obj = 145;
+
+            // Display the boxed value
+            Console.WriteLine("Boxing:");
+            Console.WriteLine($"Value type (int): {num}");
+            Console.WriteLine($"Boxed type (object): {obj}");
+
+            // Unboxing: Converting an object back to a value type
+            int unboxedNum = (int)obj; // Unboxing - obj is converted back to an int
+
+            // Display the unboxed value
+            Console.WriteLine("\nUnboxing:");
+            Console.WriteLine($"Boxed type (object): {obj}");
+            Console.WriteLine($"Value type (int): {num}");
+            Console.WriteLine($"Unboxed type (int): {unboxedNum}");
+            Console.ReadKey();
+    }
+    }
+}
+
+Output:
+ 
+
+Practical 2b
+Aim: Create a simple application to perform addition and subtraction using delegate
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NewPract2b
+{
+    // Define a delegate that takes two integers and returns an integer
+    public delegate int Operation(int x, int y);
+
+    class Program
+    {
+        // Method to perform addition
+        public static int Add(int x, int y)
+        {
+            return x + y;
+        }
+
+        // Method to perform subtraction
+        public static int Subtract(int x, int y)
+        {
+            return x - y;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.Write("NAME: Sandesh \n\n");
+            // Create delegate instances
+            Operation addOperation = new Operation(Add);
+            Operation subtractOperation = new Operation(Subtract);
+
+            // Input numbers
+            Console.Write("Enter the first number: ");
+            int num1 = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter the second number: ");
+            int num2 = int.Parse(Console.ReadLine());
+
+            // Perform addition
+            int additionResult = addOperation(num1, num2);
+            Console.WriteLine($"Addition Result: {additionResult}");
+
+            // Perform subtraction
+            int subtractionResult = subtractOperation(num1, num2);
+            Console.WriteLine($"Subtraction Result: {subtractionResult}");
+
+            // Wait for user input before closing
+            Console.ReadKey();
+        }
+    }
+}
+
+Output:
+ 
+
+
+ 
+Practical 2c
+Aim: Create a simple application to demonstrate use of the concepts of interfaces.
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Interface.aspx.cs" Inherits="NewPract2c.Interface" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+             <h2> simple application to demonstrate use of the concepts of interfaces. </h2>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <h4>NAME: Sandesh </h4>
+        </div>
+    </form>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace NewPract2c
+{
+    public interface Itransactions
+    {
+        //interface member
+        string retcode();
+        double amtfunc();
+    }
+
+    public class Transaction : Itransactions
+    {
+        private string tCode;
+        private double amount;
+        public Transaction()
+        {
+            tCode = "";
+            amount = 0.0;
+        }
+        public Transaction(string c, double a)
+        {
+            tCode = c;
+            amount = a;
+        }
+        public double amtfunc()
+        {
+            return amount;
+        }
+        public string retcode()
+        {
+            return tCode;
+        }
+
+    }
+
+    public partial class Interface : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Transaction t1 = new Transaction("Cr", 780.00);
+            Transaction t2 = new Transaction("Db", 400.00);
+            Response.Write("<br> Code " + t1.retcode());
+            Response.Write("<br> Amount " + t1.amtfunc());
+            Response.Write("<br> Code " + t2.retcode());
+            Response.Write("<br> Amount " + t2.amtfunc());
+        }
+    }
+}
+
+Output: 
+ 
+ 
+ 
