@@ -1,0 +1,138 @@
+Practical 7a
+Aim: Create a web application to demonstrate the use of different types of Cookies.
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CookiesDemo.aspx.cs" Inherits="New_Pract_7a.CookiesDemo" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Cookie Demo</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h2>Cookie Demonstration</h2>
+            <asp:Label ID="lblMessage" runat="server" Text="Cookie Info will appear here." />
+
+            <h3>Create Cookies</h3>
+            <label for="cookieValue">Enter Cookie Value:</label>
+            <asp:TextBox ID="txtCookieValue" runat="server"></asp:TextBox>
+            <br /><br />
+            <asp:Button ID="btnCreateSessionCookie" runat="server" Text="Create Session Cookie" OnClick="btnCreateSessionCookie_Click" />
+            <asp:Button ID="btnCreatePersistentCookie" runat="server" Text="Create Persistent Cookie" OnClick="btnCreatePersistentCookie_Click" />
+            <asp:Button ID="btnCreateSecureCookie" runat="server" Text="Create Secure Cookie" OnClick="btnCreateSecureCookie_Click" />
+            <br /><br />
+
+            <h3>Retrieve Cookie</h3>
+            <asp:Button ID="btnRetrieveCookie" runat="server" Text="Retrieve Cookie" OnClick="btnRetrieveCookie_Click" />
+            <br /><br />
+
+            <h3>Delete Cookie</h3>
+            <asp:Button ID="btnDeleteCookie" runat="server" Text="Delete Cookie" OnClick="btnDeleteCookie_Click" />
+        </div>
+    </form>
+    <h4>NAME: SANDESH</h4>
+</body>
+</html>
+
+Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace New_Pract_7a
+{
+    public partial class CookiesDemo : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            lblMessage.Text = "";
+        }
+
+        // Create a session cookie (expires when browser is closed)
+        protected void btnCreateSessionCookie_Click(object sender, EventArgs e)
+        {
+            string cookieValue = txtCookieValue.Text;
+            HttpCookie sessionCookie = new HttpCookie("SessionCookie", cookieValue);
+            Response.Cookies.Add(sessionCookie);
+            lblMessage.Text = "Session Cookie created successfully.";
+        }
+
+        // Create a persistent cookie (expires in 30 days)
+        protected void btnCreatePersistentCookie_Click(object sender, EventArgs e)
+        {
+            string cookieValue = txtCookieValue.Text;
+            HttpCookie persistentCookie = new HttpCookie("PersistentCookie", cookieValue);
+            persistentCookie.Expires = DateTime.Now.AddDays(30); // Set expiration to 30 days
+            Response.Cookies.Add(persistentCookie);
+            lblMessage.Text = "Persistent Cookie created successfully.";
+        }
+
+        // Create a secure cookie (only sent over HTTPS)
+        protected void btnCreateSecureCookie_Click(object sender, EventArgs e)
+        {
+            string cookieValue = txtCookieValue.Text;
+            HttpCookie secureCookie = new HttpCookie("SecureCookie", cookieValue);
+            secureCookie.Secure = true; // Ensure it's sent only over HTTPS
+            Response.Cookies.Add(secureCookie);
+            lblMessage.Text = "Secure Cookie created successfully.";
+        }
+
+        // Retrieve cookie value
+        protected void btnRetrieveCookie_Click(object sender, EventArgs e)
+        {
+            if (Request.Cookies["SessionCookie"] != null)
+            {
+                lblMessage.Text = "Session Cookie: " + Request.Cookies["SessionCookie"].Value + "<br/>";
+            }
+
+            if (Request.Cookies["PersistentCookie"] != null)
+            {
+                lblMessage.Text += "Persistent Cookie: " + Request.Cookies["PersistentCookie"].Value + "<br/>";
+            }
+
+            if (Request.Cookies["SecureCookie"] != null)
+            {
+                lblMessage.Text += "Secure Cookie: " + Request.Cookies["SecureCookie"].Value + "<br/>";
+            }
+
+            if (lblMessage.Text == "")
+            {
+                lblMessage.Text = "No cookies found.";
+            }
+        }
+
+        // Delete cookie
+        protected void btnDeleteCookie_Click(object sender, EventArgs e)
+        {
+            if (Request.Cookies["SessionCookie"] != null)
+            {
+                HttpCookie sessionCookie = new HttpCookie("SessionCookie");
+                sessionCookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
+                Response.Cookies.Add(sessionCookie);
+            }
+
+            if (Request.Cookies["PersistentCookie"] != null)
+            {
+                HttpCookie persistentCookie = new HttpCookie("PersistentCookie");
+                persistentCookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
+                Response.Cookies.Add(persistentCookie);
+            }
+
+            if (Request.Cookies["SecureCookie"] != null)
+            {
+                HttpCookie secureCookie = new HttpCookie("SecureCookie");
+                secureCookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
+                Response.Cookies.Add(secureCookie);
+            }
+
+            lblMessage.Text = "All cookies have been deleted.";
+        }
+    }
+}
