@@ -1,0 +1,307 @@
+Practical 1.a
+
+Aim: Create an application to print on screen the output of adding, subtracting, multiplying and dividing two numbers entered by the user in C#.
+
+Code: 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NewPract1a
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+	Console.Write("NAME : SANDESH \n\n");
+            // Prompt the user to enter the first number
+            Console.Write("Enter the first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+
+            // Prompt the user to enter the second number
+            Console.Write("Enter the second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            // Perform the operations
+            double addition = num1 + num2;
+            double subtraction = num1 - num2;
+            double multiplication = num1 * num2;
+            double division = num2 != 0 ? num1 / num2 : double.NaN;
+
+            // Display the results
+            Console.WriteLine($"\nResults:");
+            Console.WriteLine($"Addition: {num1} + {num2} = {addition}");
+            Console.WriteLine($"Subtraction: {num1} - {num2} = {subtraction}");
+            Console.WriteLine($"Multiplication: {num1} * {num2} = {multiplication}");
+            if (num2 != 0)
+            {
+                Console.WriteLine($"Division: {num1} / {num2} = {division}");
+            }
+            else
+            {
+                Console.WriteLine("Division: Cannot divide by zero.");
+            }
+            Console.ReadKey();
+        }
+      
+    }
+}
+
+
+Output:
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Practical 1.b
+
+Aim: Create an application to print Floyd’s triangle till n rows in C#.
+Code: 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace newPract1b
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+	Console.Write("NAME :Sandesh \n\n");
+            // Prompt the user to enter the number of rows for Floyd's triangle
+            Console.Write("Enter the number of rows for Floyd's Triangle: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            // Initialize the starting number
+            int number = 1;
+
+            // Generate Floyd's Triangle
+            Console.WriteLine("\nFloyd's Triangle:");
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write(number + " ");
+                    number++;
+                }
+                Console.WriteLine(); // Move to the next line after each row 
+            }
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+
+
+
+Output:
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Practical 1.c
+
+Aim: Create an application to demonstrate following operations 
+             i. Generate Fibonacci series.    ii. Test for prime numbers.
+
+Design:
+Home Page.aspx
+ 
+Source Code:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home Page.aspx.cs" Inherits="Pract1_d_.Home_Page" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="Practical 1 - c - i :"></asp:Label>
+&nbsp;<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/WebForm1.aspx">Generate Fibonacci series.</asp:HyperLink>
+            <br />
+            <asp:Label ID="Label2" runat="server" Text="Practical 1 - c- ii :"></asp:Label>
+&nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/WebForm2.aspx">Test for prime numbers.</asp:HyperLink>
+            <br />
+        </div>
+    </form>
+</body>
+</html>
+
+WebForm1.aspx (Generate Fibonacci series.)
+ 
+
+Source Code:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Pract1_d_.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="Enter The Number of Elements in Fibonacci Series: "></asp:Label>
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Generate Fibonacci Series" />
+        </div>
+    </form>
+</body>
+</html>
+
+WebForm2.aspx  (Test for prime numbers.)
+ 
+Source Code: 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="Pract1_d_.WebForm2" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form2" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="Enter a Number:"></asp:Label>&nbsp;
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Check for Prime No" />
+        </div>
+    </form>
+</body>
+</html>
+
+Code:
+WebForm1.aspx (Generate Fibonacci series.)
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Pract1_d_
+{
+   public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int f1 = 0, f2 = 1, f3, n, co;
+            n = int.Parse(TextBox1.Text);
+            co = 3;
+            Response.Write("Fibonacci Series:");
+            Response.Write(f1+"\t"+f2);
+            while(co<=n)
+            {
+                f3 = f1 + f2;
+                Response.Write("\t" + f3);
+                f1 = f2;
+                f2 = f3;
+                co++;
+            }
+        }
+    }
+}
+
+WebForm2.aspx  (Test for prime numbers.)
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Pract1_d_
+{
+    public partial class WebForm2 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int n, i, c;
+            n = int.Parse(TextBox1.Text);
+            for (c = 2;c<=n-1;c++)
+            {
+                if (n % c == 0)
+                    break;
+            }
+            if (n == 1)
+                Response.Write(n + " is neither prime nor composite");
+            else if (c<n-1)
+                Response.Write(n + " is not Prime Number");
+            else
+                Response.Write(n + " is Prime Number");
+        }
+    }
+}
+Output
+Home Page
+ 
+
+WebForm1.aspx (Generate Fibonacci series.)
+ 
+
+WebForm2.aspx  (Test for prime numbers.)
+ 
+
+ 
