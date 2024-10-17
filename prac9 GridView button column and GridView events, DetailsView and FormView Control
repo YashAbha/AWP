@@ -1,0 +1,119 @@
+Practical 9a
+
+Aim: Create a web application to demonstrate use of GridView button column and GridView events along with paging and sorting.
+
+Design & Code:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract 9 a.aspx.cs" Inherits="Practical_8.Pract_9_a" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="EmployeeId" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" Height="283px" Width="452px">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <Columns>
+                    <asp:BoundField DataField="EmployeeId" HeaderText="EmployeeId" SortExpression="EmployeeId" InsertVisible="False" ReadOnly="True" />
+                    <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                    <asp:BoundField DataField="Esalary" HeaderText="Esalary" SortExpression="Esalary" />
+                </Columns>
+                <EditRowStyle BackColor="#999999" />
+                <EmptyDataTemplate>
+                    No Record Found
+                </EmptyDataTemplate>
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <PagerTemplate>
+                    Pager Template
+                </PagerTemplate>
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            </asp:GridView>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:connStr %>" SelectCommand="SELECT * FROM [Employee]"></asp:SqlDataSource>
+        </div>
+    </form>
+</body>
+</html>
+Practical 9b
+
+Aim: Create a web application to demonstrate data binding using DetailsView and FormView Control
+
+Design:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PRACT 9 B.aspx.cs" Inherits="Practical_8.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+   <form id="form1" runat="server">
+        <div>
+            <!-- DetailsView Control -->
+            <asp:DetailsView ID="DetailsView1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateRows="False" DataKeyNames="EmployeeId">
+                <Fields>
+                    <asp:BoundField DataField="EmployeeId" HeaderText="EmployeeId" InsertVisible="False" ReadOnly="True" SortExpression="EmployeeId" />
+                    <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                    <asp:BoundField DataField="Esalary" HeaderText="Esalary" SortExpression="Esalary" />
+                </Fields>
+            </asp:DetailsView>
+            <br />
+
+            <!-- FormView Control -->
+            <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="EmployeeId" OnItemCommand="FormView1_ItemCommand" >
+                <EditItemTemplate>
+                    EmployeeId:
+                    <asp:Label ID="EmployeeIdLabel1" runat="server" Text='<%# Eval("EmployeeId") %>' />
+                    <br />
+                    Name:
+                    <asp:TextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' />
+                    <br />
+                    Esalary:
+                    <asp:TextBox ID="EsalaryTextBox" runat="server" Text='<%# Bind("Esalary") %>' />
+                    <br />
+                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </EditItemTemplate>
+                <InsertItemTemplate>
+                    Name:
+                    <asp:TextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' />
+                    <br />
+                    Esalary:
+                    <asp:TextBox ID="EsalaryTextBox" runat="server" Text='<%# Bind("Esalary") %>' />
+                    <br />
+                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </InsertItemTemplate>
+                <ItemTemplate>
+                    EmployeeId:
+                    <asp:Label ID="EmployeeIdLabel" runat="server" Text='<%# Eval("EmployeeId") %>' />
+                    <br />
+                    Name:
+                    <asp:Label ID="NameLabel" runat="server" Text='<%# Eval("Name") %>' />
+                    <br />
+                    Esalary:
+                    <asp:Label ID="EsalaryLabel" runat="server" Text='<%# Eval("Esalary") %>' />
+                    <br />
+                </ItemTemplate>
+            </asp:FormView>
+
+            <!-- SQL Data Source -->
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:connStr %>" 
+                SelectCommand="SELECT * FROM [Employee]">
+            </asp:SqlDataSource>
+        </div>
+    </form>
+</body>
+</html>
+
